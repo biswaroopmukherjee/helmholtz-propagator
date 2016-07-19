@@ -1,0 +1,1250 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>MATLAB Central - 2-D Fresnel diffraction in Matlab???</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- BEGIN Adobe DTM -->
+<script src="/scripts/dtm/d0cc0600946eb3957f703b9fe43c3590597a8c2c/satelliteLib-e8d23c2e444abadc572df06537e2def59c01db09.js"></script>
+<!-- END Adobe DTM -->
+<link href="/includes_content/responsive/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="/includes_content/responsive/css/site6.css?201507" rel="stylesheet" type="text/css">
+<link href="/includes_content/responsive/css/site6_lg.css" rel="stylesheet" media="screen and (min-width: 1200px)">
+<link href="/includes_content/responsive/css/site6_md.css" rel="stylesheet" media="screen and (min-width: 992px) and (max-width: 1199px)">
+<link href="/includes_content/responsive/css/site6_sm+xs.css" rel="stylesheet" media="screen and (max-width: 991px)">
+<link href="/includes_content/responsive/css/site6_sm.css" rel="stylesheet" media="screen and (min-width: 768px) and (max-width: 991px)">
+<link href="/includes_content/responsive/css/site6_xs.css" rel="stylesheet" media="screen and (max-width: 767px)">
+<!--[if IE 8]>
+<link href="/includes_content/responsive/css/site6_ie8.css" rel="stylesheet" type="text/css">
+<script src="/includes_content/responsive/scripts/bootstrap/html5shiv-printshiv.js"></script>
+<script src="/includes_content/responsive/scripts/bootstrap/respond.min.js"></script>
+<![endif]-->
+<!--[if IE 9]>
+<link href="/includes_content/responsive/css/site6_ie9.css" rel="stylesheet" type="text/css">
+<![endif]-->
+<link href="/includes_content/responsive/css/site6_print.css" rel="stylesheet" type="text/css" media="print">
+<link rel="stylesheet" href="/includes_content/responsive/css/templates/mlc.css" type="text/css">
+<!--[if IE 8]>
+<link href="/includes_content/responsive/css/templates/mlc_ie8.css" rel="stylesheet" type="text/css">
+<![endif]-->
+<!--[if IE 9]>
+<link href="/includes_content/responsive/css/templates/mlc_ie9.css" rel="stylesheet" type="text/css">
+<![endif]-->
+<link rel="stylesheet" href="/includes_content/responsive/css/apps/newsreader/newsreader.css">
+<!--[if IE 8]>
+<link href="/includes_content/responsive/css/apps/newsreader/newsreader_ie8.css" rel="stylesheet" type="text/css">
+<![endif]-->
+<!--[if IE 9]>
+<link href="/includes_content/responsive/css/apps/newsreader/newsreader_ie9.css" rel="stylesheet" type="text/css">
+<![endif]-->
+<script src="/includes_content/responsive/scripts/jquery/jquery-latest.js"></script>
+<script src="/includes_content/responsive/scripts/jquery/jquery.mobile.custom.min.js"></script>
+<script src="/includes_content/responsive/scripts/bootstrap/bootstrap.min.js"></script>
+<script src="/includes_content/responsive/scripts/global.js"></script>
+<script src="/includes_content/responsive/scripts/anchor.js"></script>
+<script src="https://fonts.mathworks.com/xvy5baa.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>
+<meta name="description" content="MathWorks is hiring worldwide. Search now for MATLAB jobs and Simulink jobs.">
+
+<script src="/matlabcentral/newsreader/assets/application-a97b84aab435b1603680cc1bcf9be57c.js" type="text/javascript"></script>
+<link href="/matlabcentral/newsreader/assets/application-35b86bd7b84c654026941a9d0d79bd07.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="/matlabcentral/newsreader/assets/profile_link/application-4ee72afb1f3341d9b649cd8caa212313.css" media="all" rel="stylesheet" type="text/css" />
+<!--link href="/includes_content/responsive/fonts/mw_font.css" media="all" rel="stylesheet" type="text/css" /-->
+<script src="/matlabcentral/newsreader/assets/profile_link/application-c5a7be494dc5ac5b9fbd4128abba2cc1.js" type="text/javascript"></script>
+
+
+
+<meta name="keywords" content="file exchange, newsgroup access, matlab central, matlab community, matlab and simulink community">
+<meta name="description" content="file exchange and newsgroup access for the MATLAB &amp; Simulink user community">
+
+<script type="text/javascript">
+  // makerzone callout javascript
+  jQuery(document).ready(function() {
+    jQuery(".random_callout").each(function() {
+      var callouts = jQuery(this).find(".panel");
+      callouts.hide().eq(Math.floor((Math.random()*callouts.length))).show();
+    });
+  });
+</script>
+
+
+<script type="text/javascript">
+
+var horizontal_offset="-150px" //horizontal offset of hint box from anchor link
+var login_state="1"
+/////No further editting needed
+
+var vertical_offset="20px" //horizontal offset of hint box from anchor link. No need to change.
+var ie=document.all
+var ns6=document.getElementById&&!document.all
+
+function getposOffset(what, offsettype){
+var totaloffset=(offsettype=="left")? what.offsetLeft : what.offsetTop;
+var parentEl=what.offsetParent;
+while (parentEl!=null){
+totaloffset=(offsettype=="left")? totaloffset+parentEl.offsetLeft : totaloffset+parentEl.offsetTop;
+parentEl=parentEl.offsetParent;
+}
+return totaloffset;
+}
+
+function iecompattest(){
+return (document.compatMode && document.compatMode!="BackCompat")? document.documentElement : document.body
+}
+
+function clearbrowseredge(obj, whichedge){
+var edgeoffset=(whichedge=="rightedge")? parseInt(horizontal_offset)*-1 : parseInt(vertical_offset)*-1
+if (whichedge=="rightedge"){
+var windowedge=ie && !window.opera? iecompattest().scrollLeft+iecompattest().clientWidth-30 : window.pageXOffset+window.innerWidth-40
+dropmenuobj.contentmeasure=dropmenuobj.offsetWidth
+if (windowedge-dropmenuobj.x < dropmenuobj.contentmeasure)
+edgeoffset=dropmenuobj.contentmeasure+obj.offsetWidth+parseInt(horizontal_offset)
+}
+else{
+var windowedge=ie && !window.opera? iecompattest().scrollTop+iecompattest().clientHeight-15 : window.pageYOffset+window.innerHeight-18
+dropmenuobj.contentmeasure=dropmenuobj.offsetHeight
+if (windowedge-dropmenuobj.y < dropmenuobj.contentmeasure)
+edgeoffset=dropmenuobj.contentmeasure-obj.offsetHeight
+}
+return edgeoffset
+}
+
+function showhint(menucontents, obj, e, tipwidth) {
+  if ((ie||ns6) && document.getElementById("hintbox")) {
+    dropmenuobj=document.getElementById("hintbox")
+    dropmenuobj.innerHTML=menucontents
+    dropmenuobj.style.left=dropmenuobj.style.top=-500
+    if (tipwidth != "") {
+      dropmenuobj.widthobj=dropmenuobj.style
+      dropmenuobj.widthobj.width=tipwidth
+    }
+    dropmenuobj.x=getposOffset(obj, "left")
+    dropmenuobj.y=getposOffset(obj, "top")
+    dropmenuobj.style.left=dropmenuobj.x-clearbrowseredge(obj, "rightedge")+obj.offsetWidth+"px"
+
+    offset_top  = obj.offsetHeight + dropmenuobj.y;
+    if (document.documentElement["clientHeight"]) {
+      if ((offset_top + dropmenuobj.offsetHeight) > document.documentElement["clientHeight"]) {
+        offset_top = offset_top - 18 - dropmenuobj.offsetHeight;
+      }
+    }
+    dropmenuobj.style.top = offset_top + "px";
+    dropmenuobj.style.visibility="visible"
+    obj.onmouseout=hidetip
+  }
+}
+
+function hidetip(e){
+dropmenuobj.style.visibility="hidden"
+dropmenuobj.style.left="-500px"
+}
+
+function createhintbox(){
+var divblock=document.createElement("div")
+divblock.setAttribute("id", "hintbox")
+document.body.appendChild(divblock)
+}
+
+if (window.addEventListener)
+window.addEventListener("load", createhintbox, false)
+else if (window.attachEvent)
+window.attachEvent("onload", createhintbox)
+else if (document.getElementById)
+window.onload=createhintbox
+
+</script>
+<script language="javascript">
+<!--
+function PopUp(page)
+{
+OpenWin = this.open(page, "page_mail", "toolbar=no,menubar=no,location=no,scrollbars=yes,resize=no,height=385,width=420");
+}
+//-->
+</script>
+<script language="JavaScript">
+<!--
+
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+  window.open(theURL,winName,features);
+}
+//-->
+</script>
+<script language="javascript">
+<!--
+function PopUp(page)
+{
+OpenWin = this.open(page, "page_mail", "toolbar=no,menubar=no,location=no,scrollbars=yes,resize=no,height=385,width=420");
+}
+//-->
+</script>
+
+<script language="JavaScript">
+<!--
+
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+  window.open(theURL,winName,features);
+}
+//-->
+</script>
+
+<script type="text/javascript" src="/includes_content/nextgen/scripts/jquery/jquery.cookie.js"></script>
+<script type="text/javascript">
+(function() {
+// Check if cookies are enabled
+function cookiesEnabled() {
+return $.cookie('check', 'valid', { expires: 1 }) && $.cookie('check') == 'valid';
+}
+// Set the language of the domain and redirect to the domain
+function setDomainLanguage(language) {
+if($.cookie("lang") != null) {
+$.removeCookie("lang");
+}
+$.cookie("lang", 'lang=' + language, {path: '/', expires: 365, domain: 'ch.mathworks.com'});
+}
+// do not display the domain selector if querystring is not present
+// or if query string has nocookie value
+// or if cookies are disabled
+var displayDomainSelector = true;
+function detectDomain() {
+var queries = {};
+$.each(document.location.search.substr(1).split('&'), function(c,q){
+if(q != undefined && q != "") {
+var i = q.split('=');
+if(i[1] != undefined) {
+queries[i[0].toString()] = i[1].toString();
+}
+}
+});
+var requested_domain = (queries['requestedDomain'] != undefined) ? queries['requestedDomain'] : "";
+var nocookie = (queries['nocookie'] != undefined) ? queries['nocookie'] : "";
+var client = (queries['client'] != undefined) ? queries['client'] : "";
+if(requested_domain == "" || nocookie == "true" || !cookiesEnabled() || client == "addons" || window.overrideDomainSelector) {
+displayDomainSelector = false;
+}
+}
+detectDomain();
+function extractDomain(url) {
+var domain;
+//find & remove protocol (http, ftp, etc.) and get domain
+if (url.indexOf("://") > -1) {
+domain = url.split('/')[2];
+} else {
+domain = url.split('/')[0];
+}
+//find & remove port number
+domain = domain.split(':')[0];
+return domain;
+}
+function getDomainContent(returnContent) {
+// Get the location information from the marketing site
+$.ajax({
+url : "/includes_content/domainSelect/location.html",
+type : "get",
+async: false,
+success : function(data) {
+$("#location_content").html(data);
+var button_link = $("#button_link").text();
+var current_location = $("#current_location").text();
+var location_key = $("#location_key").text();
+//Set the location in the text and button
+$(".text_location").text(current_location);
+$("#domain_select_button").text("Select " + current_location);
+// if the current location is different from the browser location, update the button functionality
+var browser_domain = extractDomain(window.location.href);
+if(button_link.indexOf(browser_domain) == -1) {
+// Get the current page link from the links within the selector
+new_button_link = $("." + location_key).attr("href");
+$("#domain_select_button").attr("href",new_button_link);
+$("#domain_select_button").removeAttr("data-dismiss");
+}
+}
+});
+if(returnContent) {
+return $('#country-unselected').html();
+}
+}
+$(document).ready(function () {
+//setLocation();
+// determine if links need to be rewritten
+if ( $( "#country-unselected li a" ).length ) {
+$("#country-unselected li a").each(function() {
+var link_url = $(this).attr("href").replace(/%26requestedDomain(%3D[^%26|&]*)?|requestedDomain(%3D[^%26|&]*)?(%26)?/, "");
+$(this).attr("href", link_url);
+});
+}
+if ( $( "li.headernav_login > a" ).length ) {
+var login_url = $("li.headernav_login > a").attr("href").replace(/%26requestedDomain(%3D[^%26|&]*)?|requestedDomain(%3D[^%26|&]*)?(%26)?/, "");
+$("li.headernav_login > a").attr("href", login_url);
+}
+if ( $( "li.mwa-nav_logout > a" ).length ) {
+var login_url = $("li.mwa-nav_logout > a").attr("href").replace(/%26requestedDomain(%3D[^%26|&]*)?|requestedDomain(%3D[^%26|&]*)?(%26)?/, "");
+$("li.mwa-nav_logout > a").attr("href", login_url);
+}
+if ( $( ".mwa-nav li a" ).length ) {
+$(".mwa-nav li a").each(function() {
+var link_url = $(this).attr("href").replace(/%26requestedDomain(%3D[^%26|&]*)?|requestedDomain(%3D[^%26|&]*)?(%26)?/, "");
+$(this).attr("href", link_url);
+});
+}
+$('body').on('click','.footernav_country a',function(){
+getDomainContent(false);
+});
+// set the click function for Switzerland/French link
+$('body').on('click','#swiss_french',function(){
+setDomainLanguage('fr');
+});
+// set the click function for the Switzerland/German link
+$('body').on('click','#swiss_german',function(){
+setDomainLanguage('de');
+});
+});
+// onload functionality for the selector
+$(document).ready(function () {
+if(displayDomainSelector) {
+getDomainContent(false);
+$('#country-unselected').modal('show');
+}
+});
+})(jQuery);
+</script>
+</head>
+  
+<body id="responsive_b" class="mlc">
+
+  <!-- Mobile TopNav: Start -->
+<div class="header visible-xs visible-sm" id="header_mobile">
+<nav class="navbar navbar-default" role="navigation">
+<div class="container">
+<div class="row">
+<div class="col-xs-12">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle topnav_toggle" data-toggle="collapse" data-target="#topnav_collapse">
+<span class="sr-only">Toggle Main Navigation</span>
+<span class="icon-menu"></span>
+</button>
+<a href="http://www.mathworks.com/index.html?s_tid=gn_logo" class="svg_link navbar-brand">
+<img src="/images/responsive/global/pic-header-mathworks-logo.svg" class="mw_logo" alt="MathWorks">
+</a>
+</div>
+</div>
+</div>
+<div class="row visible-xs visible-sm">
+<div class="col-xs-12">
+<div class="navbar-collapse collapse" id="topnav_collapse">
+<ul class="nav navbar-nav" id="topnav">
+<li class="headernav_login ">
+    <a href="https://www.mathworks.com/login?uri=http%3A%2F%2Fwww.mathworks.com%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783">Log In</a>
+</li>
+
+<li class="topnav_products "><a href="http://www.mathworks.com/products/?s_tid=gn_ps" >Products</a></li>
+<li class="topnav_solutions "><a href="http://www.mathworks.com/solutions/?s_tid=gn_sol">Solutions</a></li>
+<li class="topnav_academia "><a href="http://www.mathworks.com/academia/?s_tid=gn_acad">Academia</a></li>
+<li class="topnav_support "><a href="http://www.mathworks.com/support/?s_tid=gn_supp">Support</a></li>
+<li class="topnav_community "><a href="http://www.mathworks.com/matlabcentral/?s_tid=gn_mlc">Community</a></li>
+<li class="topnav_events "><a href="http://www.mathworks.com/company/events/?s_tid=gn_ev">Events</a></li>
+<li class="topnav_company "><a href="http://www.mathworks.com/company/?s_tid=gn_co">Company</a></li>
+<li class="headernav_contact"><a href="http://www.mathworks.com/company/aboutus/contact_us/?s_tid=gn_cntus">Contact Us</a></li>
+<li class="headernav_store"><a href="http://www.mathworks.com/store?s_cid=store_top_nav&s_tid=gn_store">How To Buy</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</div>
+<!-- Mobile TopNav: End -->
+<!-- Desktop TopNav: Start -->
+<div class="header hidden-xs hidden-sm" id="header_desktop">
+<nav class="navbar navbar-default" role="navigation">
+<div class="container">
+<div class="row">
+<div class="col-xs-12">
+<div class="collapse navbar-collapse" id="headernav_collapse">
+<ul class="nav navbar-nav navbar-right" id="headernav">
+<li class="headernav_contact"><a href="http://www.mathworks.com/company/aboutus/contact_us/?s_tid=gn_cntus">Contact Us</a></li>
+<li class="headernav_store"><a href="http://www.mathworks.com/store?s_cid=store_top_nav&s_tid=gn_store">How To Buy</a></li>
+<li class="headernav_login ">
+    <a href="https://www.mathworks.com/login?uri=http%3A%2F%2Fwww.mathworks.com%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783">Log In</a>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-12">
+<div class="navbar-header">
+<div class="logo_container hidden-xs hidden-sm">
+<a href="http://www.mathworks.com/index.html?s_tid=gn_logo" class="svg_link pull-left">
+<img src="/images/responsive/global/pic-header-mathworks-logo.svg" class="mw_logo" alt="MathWorks">
+</a>
+</div>
+<div class="navbar-collapse collapse hidden-xs hidden-sm">
+<ul class="nav navbar-nav" id="topnav">
+<li class="topnav_products "><a href="http://www.mathworks.com/products/?s_tid=gn_ps" >Products</a></li>
+<li class="topnav_solutions "><a href="http://www.mathworks.com/solutions/?s_tid=gn_sol">Solutions</a></li>
+<li class="topnav_academia "><a href="http://www.mathworks.com/academia/?s_tid=gn_acad">Academia</a></li>
+<li class="topnav_support "><a href="http://www.mathworks.com/support/?s_tid=gn_supp">Support</a></li>
+<li class="topnav_community "><a href="http://www.mathworks.com/matlabcentral/?s_tid=gn_mlc">Community</a></li>
+<li class="topnav_events "><a href="http://www.mathworks.com/company/events/?s_tid=gn_ev">Events</a></li>
+<li class="topnav_company "><a href="http://www.mathworks.com/company/?s_tid=gn_co">Company</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</div>
+<!-- Desktop TopNav: End -->
+<!-- Conjoined Header: Start -->
+<div class="sticky_header_container includes_subnav">
+<!-- Section Header: Start -->
+<div class="section_header level_3">
+<div class="container">
+<div class="row" id="mobile_search_row">
+<div class="col-xs-12 col-sm-6 col-sm-push-6 col-md-5 col-md-push-7" id="mobile_search">
+<div class="search_nested_content_container">
+<div id="search_scope_newsreader" class="collapse in">
+<form id="newsreadersearch_form" name="newsreadersearch_form" method="get" data-language="en" action="/matlabcentral/newsreader/search_results">
+<div class="input-group tokenized_search_field">
+<label class="sr-only">Search Newsgroup</label>
+<input type="text" class="form-control conjoined_search" autocomplete="off" name="search_string" placeholder="Search Newsgroup" id="newsreadersearch" value="">
+<div class="input-group-btn">
+<button type="button" class="btn btn_search_adjacent dropdown-toggle" data-toggle="dropdown" tabindex="-1"><span class="caret"></span><span class="search_scope_label">Newsgroup</span></button>
+<ul class="dropdown-menu list-unstyled dropdown-menu-right" role="menu">
+<!-- <li data-toggle="collapse" data-target="#search_scope_newsreader" class="newsreader_search_scope_trigger"><a href="#">Newsreader</a></li> -->
+<li data-toggle="collapse" data-target="#search_scope_support" class="newsreader_search_scope_trigger"><a href="#">Support</a></li>
+<li data-toggle="collapse" data-target="#search_scope_site" class="newsreader_search_scope_trigger"><a href="#">MathWorks</a></li>
+</ul>
+<script>
+$(".newsreader_search_scope_trigger").click(function() {
+$("#search_scope_newsreader").removeClass("in");
+$("#supportsearch").val($("#newsreadersearch").val());
+$("#query").val($("#newsreadersearch").val());
+});
+</script>
+<button type="submit" id="submitsearch" class="btn icon-search btn_search_adjacent btn_search icon_16" tabindex="-1"></button>
+</div>
+</div>
+</form>
+</div>
+<div id="search_scope_support" class="collapse">
+<form id="supportsearch_form" name="supportsearch_form" method="get" data-language="en" action="/support/search_results.html">
+<div class="input-group tokenized_search_field">
+<label class="sr-only">Search Support</label>
+<input type="text" class="form-control conjoined_search" autocomplete="off" name="q" placeholder="Search Support" id="supportsearch">
+<div class="input-group-btn">
+<button type="button" class="btn btn_search_adjacent dropdown-toggle" data-toggle="dropdown" tabindex="-1"><span class="caret"></span><span class="search_scope_label">Support</span></button>
+<ul class="dropdown-menu list-unstyled dropdown-menu-right" role="menu">
+<li data-toggle="collapse" data-target="#search_scope_newsreader" class="support_search_scope_trigger"><a href="#">Newsreader</a></li>
+<!-- <li data-toggle="collapse" data-target="#search_scope_support" class="support_search_scope_trigger"><a href="#">Support</a></li> -->
+<li data-toggle="collapse" data-target="#search_scope_site" class="support_search_scope_trigger"><a href="#">MathWorks</a></li>
+</ul>
+<script>
+$(".support_search_scope_trigger").click(function() {
+$("#search_scope_support").removeClass("in");
+$("#newsreadersearch").val($("#supportsearch").val());
+$("#query").val($("#supportsearch").val());
+});
+</script>
+<button type="submit" name="submitsearch" id="submitsearch" class="btn icon-search btn_search_adjacent btn_search icon_16" tabindex="-1"></button>
+</div>
+</div>
+</form>
+</div>
+<div id="search_scope_site" class="collapse">
+<form name="search" id="site_search" class="site_search" action="/search/site_search.html" method="get">
+<div class="input-group">
+<label class="sr-only">Search MathWorks.com</label>
+<input type="hidden" name="c[]" value="entire_site">
+<input type="text" name="q" id="query" class="form-control conjoined_search" placeholder="Search MathWorks.com" autocomplete="off" \="">
+<div class="input-group-btn">
+<button type="button" class="btn btn_search_adjacent dropdown-toggle" data-toggle="dropdown" tabindex="-1"><span class="caret"></span><span class="search_scope_label">MathWorks</span></button>
+<ul class="dropdown-menu list-unstyled dropdown-menu-right" role="menu">
+<li data-toggle="collapse" data-target="#search_scope_newsreader" class="site_search_scope_trigger"><a href="#">Newsreader</a></li>
+<li data-toggle="collapse" data-target="#search_scope_support" class="site_search_scope_trigger"><a href="#">Support</a></li>
+<!--<li data-toggle="collapse" data-target="#search_scope_site" class="site_search_scope_trigger"><a href="#">MathWorks</a></li>-->
+</ul>
+<script>
+$(".site_search_scope_trigger").click(function() {
+$("#search_scope_site").removeClass("in");
+$("#newsreadersearch").val($("#query").val());
+$("#supportsearch").val($("#query").val());
+});
+</script>
+<button type="submit" id="searchbutton" class="btn icon-search btn_search_adjacent btn_search icon_16" tabindex="-1"></button>
+</div>
+</div>
+</form>
+</div>
+</div>
+<button class="btn icon-remove btn_search pull-right icon_32 visible-xs" data-toggle="collapse" href="#mobile_search" aria-expanded="false" aria-controls="mobile_search"></button>
+</div>
+<div class="col-sm-6 col-sm-pull-6 col-md-7 col-md-pull-5 has_horizontal_local_nav" id="section_header_title">
+<div class="section_header_content">
+<div class="section_header_title add_cursor_pointer">
+<p class="h1">MATLAB Newsgroup</p>
+</div>
+<button type="button" class="navbar-toggle collapsed subnav visible-xs visible-sm" data-toggle="collapse" data-target=".mobile_subnav_content"> <span class="icon-arrow-down icon_24"></span> </button>
+</div>
+</div>
+<div class="visible-xs" id="search_actuator">
+<button class="btn icon-search btn_search pull-right icon_16" data-toggle="collapse" href="#mobile_search" aria-expanded="false" aria-controls="mobile_search"></button>
+</div>
+</div>
+<script>
+$(".section_header_title").click(function(){
+$(window.location).attr('href', '/matlabcentral/newsreader/');
+});
+</script>
+<!-- Section Header: End -->
+<!-- Mobile Local Nav: Start -->
+<div class="row visible-xs visible-sm" id="mobile_subnav">
+<div class="col-xs-12">
+<div class="navbar-collapse collapse mobile_subnav_content">
+<ul class="nav navbar-nav subnav">
+<li class="dropdown">
+  <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MATLAB Central<span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <li class="topnav_about_mlc"><a href="/matlabcentral/?s_tid=gn_mlc">Community Home</a></li>
+    <li class="topnav_answers"><a href="/matlabcentral/answers/index/?s_tid=gn_mlc_an">MATLAB Answers</a></li>
+    <li class="topnav_fileexchange"><a href="/matlabcentral/fileexchange/?s_tid=gn_mlc_fx">File Exchange</a></li>
+    <li class="topnav_cody"><a href="/matlabcentral/cody/?s_tid=gn_mlc_cody">Cody</a></li>
+    <li class="topnav_blogs"><a href="http://blogs.mathworks.com/?s_tid=gn_mlc_blg">Blogs</a></li>
+    <li class="topnav_newsreader"><a href="/matlabcentral/newsreader/?s_tid=gn_mlc_ng">Newsreader</a></li>
+    <li class="topnav_linkexchange"><a href="/matlabcentral/linkexchange/?s_tid=gn_mlc_lx">Link Exchange</a></li>
+    <li class="topnav_thingspeak"><a href="https://thingspeak.com/" target="_blank">ThingSpeak</a></li>
+  </ul>
+</li>
+<li >
+  <a href="http://www.mathworks.com/matlabcentral/newsreader/" class="home_link">Home</a>
+</li>
+<li >
+  <a href="http://www.mathworks.com/matlabcentral/newsreader/create_message" class="post_message_link">Post A New Message</a>
+</li>
+<li >
+  <a href="/matlabcentral/newsreader/advanced_search" class="advanced_search_link">Advanced Search</a>
+</li>
+<li>
+  <a data-toggle="lightbox" href="/matlabcentral/newsreader/about?inline=true" class="help_link">Help</a>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<!-- Mobile Local Nav: End -->
+</div>
+</div>
+<!-- Horo Nav: Start -->
+<div class="horizontal_nav hidden-xs hidden-sm">
+<div class="horizontal_nav_container">
+<div class="container">
+<div class="row">
+<div class="col-md-8 col-lg-9 hidden-xs hidden-sm">
+<nav class="navbar navbar-default" role="navigation" id="subnav">
+<div class="collapse navbar-collapse">
+<ul class="nav navbar-nav">
+<li class="dropdown">
+  <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MATLAB Central<span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <li class="topnav_about_mlc"><a href="/matlabcentral/?s_tid=gn_mlc">Community Home</a></li>
+    <li class="topnav_answers"><a href="/matlabcentral/answers/index/?s_tid=gn_mlc_an">MATLAB Answers</a></li>
+    <li class="topnav_fileexchange"><a href="/matlabcentral/fileexchange/?s_tid=gn_mlc_fx">File Exchange</a></li>
+    <li class="topnav_cody"><a href="/matlabcentral/cody/?s_tid=gn_mlc_cody">Cody</a></li>
+    <li class="topnav_blogs"><a href="http://blogs.mathworks.com/?s_tid=gn_mlc_blg">Blogs</a></li>
+    <li class="topnav_newsreader"><a href="/matlabcentral/newsreader/?s_tid=gn_mlc_ng">Newsreader</a></li>
+    <li class="topnav_linkexchange"><a href="/matlabcentral/linkexchange/?s_tid=gn_mlc_lx">Link Exchange</a></li>
+    <li class="topnav_thingspeak"><a href="https://thingspeak.com/" target="_blank">ThingSpeak</a></li>
+  </ul>
+</li>
+<li >
+  <a href="http://www.mathworks.com/matlabcentral/newsreader/" class="home_link">Home</a>
+</li>
+<li >
+  <a href="http://www.mathworks.com/matlabcentral/newsreader/create_message" class="post_message_link">Post A New Message</a>
+</li>
+<li >
+  <a href="/matlabcentral/newsreader/advanced_search" class="advanced_search_link">Advanced Search</a>
+</li>
+<li>
+  <a data-toggle="lightbox" href="/matlabcentral/newsreader/about?inline=true" class="help_link">Help</a>
+</li>
+
+</ul>
+</div>
+</nav>
+</div>
+<div class="col-md-4 col-lg-3 hidden-xs hidden-sm">
+<div class="cta_box">
+<ul class="list-inline">
+<li class="cta_item cta_item_general"><a href="/programs/trials/trial_request.html?eventid=56763&s_iid=mlcnr_trial_mlc_cta1" class="icon-download">Trial software</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Horo Nav: End -->
+</div>
+<!-- Conjoined Header: End -->
+    
+
+    
+
+  <div class="content_container">
+    <div class="container">        
+      <div class="row">
+        <div class="col-xs-12">
+            
+
+
+
+
+
+
+
+     
+    
+
+
+
+
+		
+<div class="row">
+  <div class="col-xs-12 col-sm-9">
+    <div class="code_responsive"><h1 id="thread_subject">2-D Fresnel diffraction in Matlab???</h1></div>
+    <div class="spacer add_margin_10"></div>
+
+      <a name="74464"></a>
+
+        <div class="panel panel-default panel_color_default panel_color_fill">
+          <div class="panel-body panel-body-no-overflow">
+            
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <div class="code_responsive">
+                  <strong>Subject:</strong> <span id="message_subject_74464">2-D Fresnel diffraction in Matlab???</span><br/>
+                  <strong>From:</strong> <a href="/matlabcentral/newsreader/author/15451">Jorge Ares Garcia</a><br/>
+                  <strong>Date:</strong> 29 Nov, 2001 22:36:15<br/>
+                  <strong>Message:</strong> 1 of 2<br/>  
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <a href="/matlabcentral/newsreader/create_message?reply_id=74464" id="message_reply_74464" rel="nofollow">Reply to this message</a><br/>
+                  <a href="/matlabcentral/newsreader/create_author_watchlist/15451?thread=29783" class="add" id="message_watchlist_add_74464" rel="nofollow"><span class="icon-add-circle"></span> Add author to My Watch List</a>
+                <br/>
+                <a href="/matlabcentral/newsreader/view_original/74464" id="message_original_74464" onclick="window.open(this.href,&#x27;new_window&#x27;,&#x27;width=760,height=600,scrollbars=yes&#x27;);return false;" rel="nofollow">View original format</a><br/>
+                  <a href="/matlabcentral/newsreader/flagged_as_spam/74464" id="message_flag_spam_74464" rel="nofollow">Flag as spam</a>
+              </div>
+            </div>
+
+            <div class="spacer add_margin_5"></div>
+
+          </div>
+          <div class="panel-footer">
+           <div class="code_responsive">
+              <p id="message_body_74464"> 
+                I am looking for any available matlab file compute the 2-D fresnel<br>
+transform of an optics field ...<br>
+I've heard that is posible to develope this with the help of the fft<br>
+function but I'm not sure how can I do it,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I wait<br>
+for suggestions,<br>
+<br>
+<br>
+Thank you,<br>
+<br>
+JORGE_________<br>
+<br>
+e-mail:fatxutxa@usc.es
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      <a name="74503"></a>
+
+        <div class="panel panel-default panel_color_default panel_color_fill">
+          <div class="panel-body panel-body-no-overflow">
+            
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <div class="code_responsive">
+                  <strong>Subject:</strong> <span id="message_subject_74503">2-D Fresnel diffraction in Matlab???</span><br/>
+                  <strong>From:</strong> <a href="/matlabcentral/newsreader/author/12485">Edric M Ellis</a><br/>
+                  <strong>Date:</strong> 30 Nov, 2001 08:02:58<br/>
+                  <strong>Message:</strong> 2 of 2<br/>  
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <a href="/matlabcentral/newsreader/create_message?reply_id=74503" id="message_reply_74503" rel="nofollow">Reply to this message</a><br/>
+                  <a href="/matlabcentral/newsreader/create_author_watchlist/12485?thread=29783" class="add" id="message_watchlist_add_74503" rel="nofollow"><span class="icon-add-circle"></span> Add author to My Watch List</a>
+                <br/>
+                <a href="/matlabcentral/newsreader/view_original/74503" id="message_original_74503" onclick="window.open(this.href,&#x27;new_window&#x27;,&#x27;width=760,height=600,scrollbars=yes&#x27;);return false;" rel="nofollow">View original format</a><br/>
+                  <a href="/matlabcentral/newsreader/flagged_as_spam/74503" id="message_flag_spam_74503" rel="nofollow">Flag as spam</a>
+              </div>
+            </div>
+
+            <div class="spacer add_margin_5"></div>
+
+          </div>
+          <div class="panel-footer">
+           <div class="code_responsive">
+              <p id="message_body_74503"> 
+                &gt;&gt;&gt;&gt;&gt; "JAG" == Jorge Ares Garcia &lt;fatxutxa@usc.es&gt; writes:<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;JAG&gt; I am looking for any available matlab file compute the 2-D<br>
+&nbsp;&nbsp;&nbsp;&nbsp;JAG&gt; fresnel transform of an optics field ... I've heard that is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;JAG&gt; posible to develope this with the help of the fft function<br>
+&nbsp;&nbsp;&nbsp;&nbsp;JAG&gt; but I'm not sure how can I do it<br>
+<br>
+The Rayleigh-Sommerfeld diffraction formula for propagating an<br>
+arbitrary wavefront from z = z1 to z = z2 looks like:<br>
+<br>
+u2( x1, x2 ) = \int \int u1( x1, y1 )...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* ( z12 / ( i * lambda * r12^2 ) ) ...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* exp( -i k r12 ) dx1 dy1<br>
+<br>
+I.e. integrate u1 (complex amplitude in z1 plane) multiplied by a<br>
+transfer function, over the whole (x1,y1) plane. By substituting the<br>
+expression for r12 - the distance between (x1,y1) and (x2,y2) - the<br>
+integral above takes the form of a convolution. So, we can write:<br>
+<br>
+u2( x1, x2 ) = conv( u1( x1, y1 ), h12( x2, y2 ) )<br>
+<br>
+where<br>
+<br>
+h12( x, y ) = exp( -i * k * z12 * sqrt( 1 + (x/z12)^2 + (y/z12)^2 ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-------------------------------------------------------<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i * lambda * z12 * ( 1 + (x/z12)^2 + (y/z12)^2 )<br>
+<br>
+So, taking Fourier transforms of both sides:<br>
+<br>
+U2( E, n ) = U1( E, n ) * H12( E, n )<br>
+<br>
+Where ( E, n ) are the spatial frequency coordinates. The Fourier<br>
+transform of h12 can be calculated analytically, and is:<br>
+<br>
+H12( E, n ) = exp( -i * k * z12 * sqrt( 1 - lambda^2 * (E^2 + n^2) ) )<br>
+<br>
+(NB: k is the wavenumber, 2*pi/lambda)<br>
+<br>
+A useful paper:<br>
+E. Sziklas & A. Siegman, "Mode calculations in unstable resonators<br>
+with flowing saturable gain. 2: Fast Fourier transform method.",<br>
+Applied Optics 14(8), pp. 1874--1889, 1975.<br>
+<br>
+Hope this helps,<br>
+<br>
+Edric.<br>
+<br>
+-- <br>
+Edric M Ellis<br>
+The MathWorks, Ltd.<br>
+Tel: +44 (0) 1223 423 200    Ext: 218<br>
+Fax: +44 (0) 1223 423 289
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+
+    <div class="row add_margin_5">
+      <div class="col-xs-12">
+        <a href="/matlabcentral/newsreader/thread_feed/29783"><span class="icon-rss-enclosed icon_16"></span></a>
+        <a href="/matlabcentral/newsreader/thread_feed/29783" id="thread_feed">Feed for this Thread</a>
+        <link href="http://www.mathworks.com/matlabcentral/newsreader/thread_feed/29783" rel="alternate" title="RSS" type="application/rss+xml" />
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-xs-12 col-sm-3">
+
+      <ul class="list-unstyled">
+          <li>
+            <a href="/matlabcentral/newsreader/create_thread_watchlist/29783" id="thread_watchlist_add" rel="nofollow"><span class="icon-add-circle"></span> Add to My Watch List</a>
+          </li>
+        <li>
+          <a href="#" data-toggle="modal" data-target="#what_is_a_watchlist"><span class="icon-info-circle"></span> What is a Watch List?</a>
+        </li>
+      </ul>
+      <div id="what_is_a_watchlist" class="modal fade" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">What is a watch list?</h4>
+      </div>
+
+      <div class="modal-body">
+        <p>You can think of your watch list as threads that you have bookmarked.</p> 
+        <p>You can add tags, authors, threads, and even search results to your watch list. This way you can easily keep track of topics that you're interested in. To  view your watch list, click on the &quot;My Newsreader&quot; link.</p>
+        
+        <p>To add items to your watch list, click the &quot;add to watch list&quot; link at the bottom of any page.</p>
+        <h3>How do I add an item to my watch list?</h3>
+        <h4>Search</h4>
+        <p>To add  search criteria to your watch list, search for the desired term in the search box. Click on the &quot;Add this search to my watch list&quot; link on the search results page.</p>
+        <p>You can also add a tag to your watch list by searching for the tag with the directive &quot;tag:tag_name&quot; where tag_name is the name of the tag you would like to watch.</p>
+        
+        <h4>Author</h4>
+        <p>To add an author to your watch list, go to the author's profile page and click on the &quot;Add this author to my watch list&quot; link at the top of the page. You can also add an author to your watch list by going to a thread that the author has posted to and clicking on the &quot;Add this author to my watch list&quot; link. You will be notified whenever the author makes a post.</p>
+        <h4>Thread</h4>
+        <p>To add a thread to your watch list, go to the thread page and click  the &quot;Add this thread to my watch list&quot; link at the top of the page.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+    <div class="panel panel-default">
+  <div class="panel-body" id="thread_tags">
+
+    <h3>Tags for this Thread</h2>
+
+    <div id="all_tags">
+      <p><em>No tags are associated with this thread.</em></p>
+
+    </div>
+    
+
+    <div class="spacer add_margin_15"></div>
+
+    <h5>What are tags?</h5>
+    <small>
+    <p>A tag is like a keyword or category label associated with each thread. Tags make it easier for you to find threads of interest.</p>
+    <p>Anyone can tag a thread. Tags are public and visible to everyone.</p>
+    </small>
+
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  jQuery("#add_tags").multicomplete({
+    data_source: { url: "/matlabcentral/newsreader/tags" }
+  });
+
+  jQuery("#add_new_tags_form").on('ajax:complete', function(){
+    jQuery('.multicomplete > .multicomplete-selected-item').remove()
+    jQuery("#add_tags").val('').blur();
+    return false;
+  });
+</script>
+
+<!--
+<h2 style=" color:#000000; font-size:14px; ">Tags for this Thread</h2>
+
+<div id="all_tags" class="tags tag_group tag-list">
+  <p><em>No tags are associated with this thread.</em></p>
+
+</div>
+
+
+
+<h3>What are tags?</h3>
+<p>A tag is like a keyword or category label associated with each thread. Tags make it easier for you to find threads of interest.</p>
+<p>Anyone can tag a thread. Tags are public and visible to everyone.</p>
+
+  -->
+
+    <div class="hidden-sm">
+      <div class="row hidden-xs">
+  <div class="col-sm-6 col-md-12">
+    <div class="panel panel-default panel_color_default panel_color_fill add_margin_20">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-8">
+            <p class="h3">Got questions<span class="add_font_arial">?</span><br>Get answers.</p>
+            <a class="icon-chevron" href="/matlabcentral/answers/?s_cid=nr2ans">MATLAB Answers</a> 
+          </div>
+          <div class="col-xs-4"> 
+            <img src="/images/responsive/callouts/answers-question-mark.png"> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="spacer hidden-sm add_margin_30"></div>
+  
+  <div class="col-sm-6 col-md-12">
+    <div class="random_callout">
+	<div class="panel panel-default panel_color_default panel_color_fill panel_font_downsize add_margin_20"   >
+  <div class="panel-body"> <img src="/images/responsive/callouts/logos/discover-makerzone-logo.png" alt="Discover MakerZone" class="add_margin_10">
+    <p>MATLAB and Simulink resources for Arduino, LEGO, and Raspberry Pi test</p>
+    <a href="http://makerzone.mathworks.com/?utm_source=Acad&utm_medium=spotlight&utm_campaign=MZ" class="icon-chevron">Learn more </a> </div>
+</div>
+<div class="panel panel-default panel_color_default panel_color_fill panel_font_downsize add_margin_20">
+  <div class="panel-body">
+    <p class="h3">Discover what MATLAB <sup>®</sup> can do for your career.</p>
+    <p>Opportunities for recent engineering grads.</p>
+    <a class="icon-chevron" href="/company/jobs/opportunities/students/infographic.html?source=7677">Apply Today </a> </div>
+</div>
+<div class="panel panel-default panel_color_default panel_color_fill panel_image_cover panel_font_downsize add_margin_20">
+  <div class="panel-body">
+    <p class="h3">MATLAB Academy</p>
+    <p>On-demand access to MATLAB training.</p>
+    <a class="icon-chevron" href="/services/training/req_brochure.html">Download now </a> </div>
+  <div class="panel-footer panel_color_default panel_color_fill" style="background-color: #000; background-image:url(/images/responsive/callouts/matlab-academy-training.jpg);"></div>
+</div>
+</div>
+
+  </div>
+</div>
+    </div>
+
+  </div>
+</div>
+
+
+		<div id="what_is_a_watchlist" class="modal fade" aria-hidden="true" style="display: none;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+		        <h4 class="modal-title">About Newsgroups, Newsreaders, and MATLAB Central</h4>
+		      </div>
+		      <div class="modal-body">
+		        <h3>What are newsgroups?</h3>
+		        <p>The newsgroups are a worldwide forum that is open to everyone. Newsgroups are used to discuss a huge range of topics, make announcements, and trade files.</p>
+
+		        <p>Discussions are threaded, or grouped in a way that allows you to read a posted message and all of its replies in chronological order. This makes it easy to follow the thread of the conversation, and to see what&rsquo;s already been said before you post your own reply or make a new posting.</p>
+
+		        <p>Newsgroup content is distributed by servers hosted by various organizations on the Internet. Messages are exchanged and managed using open-standard protocols. No single entity &ldquo;owns&rdquo; the newsgroups.</p>
+
+		        <p>There are thousands of newsgroups, each addressing a single topic or area of interest. The MATLAB Central Newsreader posts and displays messages in the comp.soft-sys.matlab newsgroup.</p>
+
+		        <h3>How do I read or post to the newsgroups?</h3>
+		        <p><strong>MATLAB Central</strong></p>
+		        <p>You can use the integrated newsreader at the MATLAB Central website to read and post messages in this newsgroup. MATLAB Central is hosted by MathWorks.</p>
+
+		        <p>Messages posted through the MATLAB Central Newsreader are seen by everyone using the newsgroups, regardless of how they access the newsgroups. There are several advantages to using MATLAB Central.</p>
+		        <div id="advantages">
+		          <p>
+		            <strong>One Account</strong><br>
+		            Your MATLAB Central account is tied to your MathWorks Account for easy access.
+		          </p>
+		          <p>
+		            <strong>Use the Email Address of Your Choice</strong><br>
+		            The MATLAB Central Newsreader allows you to define an alternative email address as your posting address, avoiding clutter in your primary mailbox and reducing spam.
+		          </p>
+		          <p>
+		            <strong>Spam Control</strong><br>
+		            Most newsgroup spam is filtered out by the MATLAB Central Newsreader.
+		          </p>
+		          <p>
+		            <strong>Tagging</strong><br>
+		            Messages can be tagged with a relevant label by any signed-in user. Tags can be used as keywords to find particular files of interest, or as a way to categorize your bookmarked postings. You may choose to allow others to view your tags, and you can view or search others&rsquo; tags as well as those of the community at large. Tagging provides a way to see both the big trends and the smaller, more obscure ideas and applications.
+		          </p>
+		          <p>
+		            <strong>Watch lists</strong><br>
+		            Setting up watch lists allows you to be notified of updates made to postings selected by author, thread, or any search variable. Your watch list notifications can be sent by email (daily digest or immediate), displayed in My Newsreader, or sent via RSS feed.
+		        </p>
+		        </div>
+
+		        <h3>Other ways to access the newsgroups</h3>
+		        <ul>
+		          <li>Use a newsreader through your school, employer, or internet service provider</li>
+		          <li>Pay for newsgroup access from a commercial provider</li>
+		          <li>Use Google Groups</li>
+		          <li>Mathforum.org provides a newsreader with access to the comp.soft sys.matlab newsgroup</li>
+		          <li>Run your own server. For typical instructions, see: <a href="http://www.slyck.com/ng.php?page=2">http://www.slyck.com/ng.php?page=2</a></li>
+		        </ul>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div>
+
+
+
+  
+
+
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+
+
+<div id="location_content" style="display:none;"></div>
+
+
+<div class="modal fade" id="country-unselected" translate="no">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <object type="image/svg+xml" width="167px" class="mw_logo" alt="MathWorks" data="/images/responsive/global/pic-header-mathworks-logo2.svg">
+          <img alt="MathWorks" width="167px" src="/images/responsive/global/pic-header-mathworks-logo.png">
+        </object>
+      </div>
+      <div class="modal-body">
+        <div class="row add_margin_40">
+          <div class="col-xs-12">
+            <h1 class="icon-globe icon_color_secondary">Select Your Country</h1>
+            <p>Choose your country to get translated content where available and see local events and offers. Based on your location, we recommend that you select: <strong class="text_location"></strong>.</p>
+            <a href="#" id="domain_select_button" class="btn btn_secondary" data-dismiss="modal"></a>
+          </div>
+        </div>
+        <p>You can also select a location from the following list:</p>
+        <div class="row add_margin_30">
+          <div class="col-sm-4 col-md-3">
+            <h3 class="add_bottom_rule">Americas</h3>
+            <ul class="list-unstyled">
+              <li><a href="http://www.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="canada_select">Canada</a> (English)</li>
+              <li><a href="http://www.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="united_states_select">United States</a> (English)</li>
+            </ul>
+          </div>
+          <div class="col-sm-4 col-md-6">
+            <h3 class="add_bottom_rule">Europe</h3>
+            <div class="row">
+              <div class="col-xs-6 col-sm-12 col-md-6">
+                <ul class="list-unstyled add_margin_0_sm">
+                  <li><a href="http://nl.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="belgium_select">Belgium</a> (English)</li>
+                  <li><a href="http://se.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="denmark_select">Denmark</a> (English)</li>
+                  <li><a href="http://de.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="deutschland_select">Deutschland</a> (Deutsch)</li>
+                  <li><a href="http://es.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="espana_select">España</a> (Español)</li>
+                  <li><a href="http://se.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="finland_select">Finland</a> (English)</li>
+                  <li><a href="http://fr.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="france_select">France</a> (Français)</li>
+                  <li><a href="http://uk.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="ireland_select">Ireland</a> (English)</li>
+                  <li><a href="http://it.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="italia_select">Italia</a> (Italiano)</li>
+                  <li><a href="http://nl.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="luxembourg_select">Luxembourg</a> (English)</li>
+                </ul>
+              </div>
+              <div class="col-xs-6 col-sm-12 col-md-6">
+                <ul class="list-unstyled">
+                  <li><a href="http://nl.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="netherlands_select">Netherlands</a> (English)</li>
+                  <li><a href="http://se.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="norway_select">Norway</a> (English)</li>
+                  <li><a href="http://de.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="osterreich_select">Österreich</a> (Deutsch)</li>
+                  <li><a href="http://www.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="portugal_select">Portugal</a> (English)</li>
+                  <li><a href="http://se.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="sweden_select">Sweden</a> (English)</li>
+                  <li>Switzerland
+                    <ul class="list-unstyled add_indent_20">
+                      <li><a href="http://ch.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" id="swiss_german" class="switzerland_select">Deutsch</a></li>
+                      <li><a href="http://ch.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" id="swiss_french">Français</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="http://uk.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="united_kingdom_select">United Kingdom</a> (English)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4 col-md-3">
+            <h3 class="add_bottom_rule">Asia Pacific</h3>
+            <ul class="list-unstyled">
+              <li><a href="http://au.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="australia_select">Australia</a> (English)</li>
+              <li><a href="http://in.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="india_select">India</a> (English)</li>
+              <li><a href="http://au.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="new_zealand_select">New Zealand</a> (English)</li>
+              <li><a href="http://cn.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="china_select">中国</a> (简体中文)</li>
+              <li><a href="http://jp.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="japan_select">日本</a> (日本語)</li>
+              <li><a href="http://kr.mathworks.com/includes_content/domainRedirect/country_select_alt.html?action=changeCountry&uri=%2Fmatlabcentral%2Fnewsreader%2Fview_thread%2F29783.html&domain=www.mathworks.com&s_tid=gn_loc_drop" class="korea_select">한국</a> (한국어)</li>
+            </ul>
+          </div>
+        </div>
+        <p class="text-center"><strong><a href="/company/worldwide/">See all countries</a></strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+      
+  
+  <!-- MOBILE CTA - Begin -->
+  <div class="cta_container_mobile visible-sm visible-xs">
+    <div class="container-fluid">      
+      <div class="row add_margin_20">
+        <div class="col-xs-12">
+          <div class="cta_box">
+<ul class="list-inline">
+<li class="cta_item cta_item_general"><a href="/programs/trials/trial_request.html?eventid=56763&s_iid=mlcnr_trial_mlc_cta1" class="icon-download">Trial software</a></li>
+</ul>
+</div> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- MOBILE CTA - End -->
+
+  <footer id="footer" class="bs-footer"> 
+    <!-- BASIC FOOTER CONTENT - Begin --> 
+    <div class="container"> 
+      <div class="footer">
+<div class="row">
+<div class="col-xs-12 col-md-9">
+<ul class="countrynav" id="countrynav">
+<li class="footernav_country">
+<a href="javascript:void(0);" data-toggle="modal" data-target="#country-unselected">
+<span class="icon-globe icon_color_quinary icon_16"></span>United States
+</a>
+</li>
+</ul>
+<div class="clearfix"></div>
+<ul class="footernav">
+<li class="footernav_patents"><a href="http://www.mathworks.com/company/aboutus/policies_statements/patents.html?s_tid=gf_pat">Patents</a></li>
+<li class="footernav_trademarks"><a href="http://www.mathworks.com/company/aboutus/policies_statements/trademarks.html?s_tid=gf_trd">Trademarks</a></li>
+<li class="footernav_privacy"><a href="http://www.mathworks.com/company/aboutus/policies_statements/?s_tid=gf_priv">Privacy Policy</a></li>
+<li class="footernav_piracy"><a href="http://www.mathworks.com/company/aboutus/policies_statements/piracy.html?s_tid=gf_pir">Preventing Piracy</a></li>
+<li class="footernav_terms"><a href="http://www.mathworks.com/matlabcentral/termsofuse.html ">Terms of Use</a></li>
+</ul>
+<div class="clearfix"></div>
+<div class="clearfix"></div>
+<p class="copyright" translate="no">&copy; 1994-2016 The MathWorks, Inc.</p>
+</div>
+<div class="clearfix visible-sm add_margin_10"></div>
+<div class="col-xs-12 col-md-3">
+<div class="social_media">
+<ul class="social_media_icons">
+<li>
+<a href="http://www.facebook.com/MATLAB" target="_blank" class="svg_link">
+<img src="/images/responsive/global/ico-facebook.svg" alt="Facebook" class="ico_facebook">
+</a>
+</li>
+<li>
+<a href="http://www.twitter.com/MATLAB" target="_blank" class="svg_link">
+<img src="/images/responsive/global/ico-twitter.svg" alt="Twitter" class="ico_twitter">
+</a>
+</li>
+<li>
+<a href="https://plus.google.com/117177960465154322866?prsrc=3" target="_blank" class="svg_link">
+<img src="/images/responsive/global/ico-google-plus.svg" alt="Google+" class="ico_google">
+</a>
+</li>
+<li>
+<a href="http://www.linkedin.com/company/the-mathworks_2" target="_blank" class="svg_link">
+<img src="/images/responsive/global/ico-linkedin.svg" alt="LinkedIn" class="ico_linkedin">
+</a>
+</li>
+<li>
+<a href="http://www.mathworks.com/company/rss/index.html" class="svg_link">
+<img src="/images/responsive/global/ico-rss.svg" alt="RSS" class="ico_rss">
+</a>
+</li>
+</ul>
+<div class="clearfix"></div>
+<p><em>Join the conversation</em></p>
+</div>
+</div>
+</div>
+</div>
+<!-- BEGIN Adobe DTM -->
+<script type="text/javascript">
+try {
+_satellite.pageBottom();
+} catch (e) {
+//something went wrong
+}
+</script>
+<!-- END Adobe DTM -->
+    </div>
+    <!-- BASIC FAT FOOTER CONTENT - End -->
+  </footer>
+
+    <script src="/includes_content/responsive/scripts/lightbox-min.js"></script> 
+    <script>
+      $(document).ready(function ($) {
+
+        // delegate calls to data-toggle="lightbox"
+        $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+          event.preventDefault();
+          return $(this).ekkoLightbox({
+            onShown: function() {
+				if ($('.ekko-lightbox-container iframe').length) {
+				  $(".ekko-lightbox-container iframe").attr("scrolling","no");
+				  $(".ekko-lightbox-container iframe").load(lightboxIframeHeight);
+				}
+            },
+            onNavigate: function(direction, itemIndex) {
+              if (window.console) {
+                return console.log('Navigating '+direction+'. Current item: '+itemIndex);
+              }
+            }
+          });
+        });
+		
+		// resize
+		$(window).resize(lightboxIframeHeight)	
+
+		// lightbox height function
+		function lightboxIframeHeight() {
+			if ($('.ekko-lightbox-container iframe').length) {
+				whichIframeHeight = $('.ekko-lightbox-container iframe').contents().find('body').height() + 20;
+				$(".ekko-lightbox-container iframe").css("height",whichIframeHeight);
+			}
+		}
+
+        //Programatically call
+        $('#open-image').click(function (e) {
+          e.preventDefault();
+          $(this).ekkoLightbox();
+        });
+        $('#open-youtube').click(function (e) {
+          e.preventDefault();
+          $(this).ekkoLightbox();
+        });
+      });
+    </script> 
+
+</body>
+</html>

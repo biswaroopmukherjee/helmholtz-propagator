@@ -1,0 +1,488 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <meta http-equiv="Content-Language" content="en-us">
+      <LINK REL="SHORTCUT ICON" HREF="../../../images/favicon.ico">
+
+  <meta name="Author" content="Arne L&uuml;ker">
+  <meta name="Description" content="Physics and Nanotechnology">
+  <meta name="email" content="arnelueker@aim.com">
+  <meta name="KeyWords" content="science, matlab, ferroelectrics, piezoelectrics, optics, Tesla, Feynman, history, elements, javascript">
+  <TITLE>o-[[ w w w . A r n e - L &uuml; k e r . d e ]]-o</TITLE>
+
+
+<script language="JavaScript1.2">
+
+// this function pops up a new window.
+function open_window(page,w,h) {
+        openwindow = this.open(page,"new_window","toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=no,width=" + w + ",height=" + h);
+        }
+
+</script>
+
+<script>
+
+
+
+var SLIDE_path = 'slideshow/'; // Path to the folder, where the images are put.
+
+var SLIDE_text = new Array();
+SLIDE_text[1]  = ''; // Text to Image 1
+SLIDE_text[2]  = ''; // Text to Image 2
+SLIDE_text[3]  = ''; // Text to Image 3
+SLIDE_text[4]  = ''; // Text to Image 4
+SLIDE_text[5]  = ''; // Text to Image 5
+SLIDE_text[6]  = ''; // Text to Image 1
+SLIDE_text[7]  = ''; // Text to Image 2
+SLIDE_text[8]  = ''; // Text to Image 3
+SLIDE_text[9]  = ''; // Text to Image 4
+SLIDE_text[10]  = ''; // Text to Image 5
+SLIDE_text[11]  = ''; // Text to Image 1
+SLIDE_text[12]  = ''; // Text to Image 2
+
+
+
+
+// Don't change anything under here...
+
+var SLIDE_pic = new Array();
+var SLIDE_load = new Array();
+var SLIDE_status, SLIDE_timeout;
+var SLIDE_actual = 10;
+var SLIDE_speed = 5000;
+var SLIDE_fade = 10;
+
+for (i = 1; i <= SLIDE_text.length-1; i++)
+{
+  SLIDE_pic[i] = SLIDE_path+i+'.jpg';
+  SLIDE_load[i] = new Image();
+  SLIDE_load[i].src = SLIDE_pic[i];
+}
+var SLIDE_count = SLIDE_pic.length-1;
+
+function SLIDE_start()
+{
+  document.getElementById('SLIDE_pause').disabled = true;
+  document.images.SLIDE_picBox.src = SLIDE_load[SLIDE_actual].src;
+  document.getElementById("SLIDE_textBox").innerHTML= SLIDE_text[SLIDE_actual];
+}
+
+function SLIDE_play()
+{
+  document.getElementById('SLIDE_play').disabled = true;
+  document.getElementById('SLIDE_pause').disabled = false;
+  SLIDE_actual++;
+  SLIDE_slide();
+  SLIDE_status = 'SLIDE_play';
+  SLIDE_timeout = setTimeout("SLIDE_play()",SLIDE_speed);
+}
+
+function SLIDE_pause()
+{
+  clearTimeout(SLIDE_timeout);
+  SLIDE_status = 'SLIDE_pause';
+  document.getElementById('SLIDE_pause').disabled = true;
+  document.getElementById('SLIDE_play').disabled = false;
+}
+
+function SLIDE_back()
+{
+  clearTimeout(SLIDE_timeout);
+  SLIDE_actual--;
+  SLIDE_slide();
+  if (SLIDE_status != 'SLIDE_pause') SLIDE_timeout = setTimeout("SLIDE_play()",SLIDE_speed);
+}
+
+function SLIDE_forward()
+{
+  clearTimeout(SLIDE_timeout);
+  SLIDE_actual++;
+  SLIDE_slide()
+  if (SLIDE_status != 'SLIDE_pause') SLIDE_timeout = setTimeout("SLIDE_play()",SLIDE_speed);
+}
+
+
+function SLIDE_slide()
+{
+  if (SLIDE_status != 'SLIDE_pause')
+  {
+    document.getElementById('SLIDE_play').disabled = true;
+    document.getElementById('SLIDE_pause').disabled = false;
+  }
+  if (SLIDE_actual > (SLIDE_count)) SLIDE_actual=1;
+  if (SLIDE_actual < 1) SLIDE_actual = SLIDE_count;
+  if (document.all)
+  {
+    document.getElementById("SLIDE_textBox").style.background = "transparent";
+    document.images.SLIDE_picBox.style.filter="blendTrans(duration=2)";
+    document.images.SLIDE_picBox.style.filter="blendTrans(duration=SLIDE_fade)";
+    document.images.SLIDE_picBox.filters.blendTrans.Apply();
+  }
+  document.images.SLIDE_picBox.src = SLIDE_load[SLIDE_actual].src;
+  if (document.getElementById) document.getElementById("SLIDE_textBox").innerHTML= SLIDE_text[SLIDE_actual];
+  if (document.all) document.images.SLIDE_picBox.filters.blendTrans.Play();
+}
+
+function SLIDE_speeds(SLIDE_valgt)
+{
+  SLIDE_speed = SLIDE_valgt.options[SLIDE_valgt.selectedIndex].value;
+}
+</script>
+
+
+
+  <style type="text/css"> BODY { SCROLLBAR-BASE-COLOR: #003100; SCROLLBAR-ARROW-COLOR: #008800; }</style>
+</HEAD>
+<BODY background="../../../images/dif_grain.gif" | ALINK="#808080" LINK="#B92B06" vlink="#B92B06" bgcolor="#000000" text="#008000">
+
+
+
+<p align="center"><img src="cp_top.jpg" width="812" height="153" border="0" alt="">
+<br>
+<div align="center">
+<br>
+<h2><font face="Perpetua Titling MT">Fresnel Diffraction</font></h2><br>
+<p align="center"><b><font face="Courier New"><font color="#FF3300" size="2">
+Text by Arne L&uuml;ker
+</p><br>
+<br>
+
+    <tbody>
+<table cellspacing="0" cellpadding="5" width="850" border="0" style="border-collapse: collapse;">
+  <tbody>
+    <tr>
+
+    </tr>
+    <tr>
+      <td width="100%"><font face="Verdana" color="#00AA00" size="2">
+
+
+<p align="justify">
+
+
+
+<u><b>Abstract:</b></u> <i>A simple Matlab source code for the calculations of Fresnel Diffraction, or near-field diffraction patterns, is given.
+We look both at some interesting and historical issues of this basic topic in optics.</i>
+<br>
+<br>
+<img align="left" src="Francesco Maria Grimaldi.jpg" alt="Francesco Maria Grimaldi" hspace="10" vspace="10" width="179" height="231" border="0">
+
+<u><b>The Leading Actors:</b></u> Probably the first who investigated the diffraction of light was FRANCESCO MARIA GRIMALDI (2 April 1618 – 28 December 1663), an Italian Jesuit priest, who was a mathematician and physicist and taught at the Jesuit college in Bologna. After school, he was, according to <a href="javascript:open_window('Montucla.html',450,550);"><b>Montucla</b></a>, employed several years in giving instructions in the belles-lettres, meaning "beautiful" or "fine" writing. During the latter part of his life he applied himself to astronomy and optics.
+<br>
+<br>
+Grimaldi was associated with <a href="javascript:open_window('Riccioli.html',450,550);"><b>Riccioli</b></a> in making astronomical observations. These two gave particular descriptions of the spots on the moon's disk. It was asserted by Montucla that Grimaldi gave these spots the designations by which they are distinguished among astronomers up to date; thus superseding the names of the mountains and seas of the earth which had been given to them by <a href="javascript:open_window('Hevelius.html',450,550);"><b>Hevelius</b></a>: but this is apparently a mistake.
+<br>
+<br>
+That which has given celebrity to Grimaldi is his work entitled <i>Physico-mathesis de Lumine, Coloribus et Iride aliisque annexis</i>, which was published at Bologna in 1665. The greater part of the work consists of a tedious discussion concerning the nature of light, the conclusion of which is that light is not a substantial but an accidental quality; the rest, however, possesses the highest interest, since it contains accounts of numerous experiments relating to the interference of the rays of light. A description of the work in given in the <i>Philosophical transactions</i> for that year.
+<br>
+<br>
+<a href="fresnel1.html"><img align="right" src="Fresnel diff.jpg" alt="Fresnel Diffraction" hspace="10" vspace="10" width="300" height="307" border="3"></a>
+Grimaldi, having admitted the sun's light into a dark room through a small aperture, remarked that the breadths of the shadows of slender objects, as needles and hairs (as seen at the top of the right figure), on a screen, were much greater than they would have been if the rays of light had passed by them in straight lines. He observed also that the circle of light formed on a screen by the rays passing through a very small perforation in a plate of lead was greater than it would be if its magnitude depended solely on the divergency of the rays; and he arrived at the conclusion that the rays of light suffer a change of direction in passing near the edges of objects: this effect he designated 'diffraction.' By Newton it was subsequently called 'inflexion.' He found that the shadow of a small body was surrounded by three coloured streaks or bands which became narrower as they receded from the centre of the shadow; and, where the light was strong, he perceived similar coloured bands within the shadow: there appeared to be two or more of these, the number increasing in proportion as the shadow was farther from the body.
+<br>
+<br>
+<img align="left" src="fresnel-holes.jpg" alt="Fresnel Diffraction" hspace="10" vspace="10" width="400" height="410" border="1"></a>
+
+Having admitted the sun's rays into a room through multiple small circular apertures, Grimaldi received the cones of light on a screen beyond the place where they overlapped each other; and he observed, as might be expected, that, within the space on which the rays from both apertures fell, the screen was more strongly enlightened that it would have been by one cone of light; but he was surprised to find that the boundaries of the penumbral portions which overlaid one another were darker than the corresponding portions in which there was no overlaying - see figure on the left. This phenomenon of interference was, at the time, enunciated as a proposition:- 'That a body actually enlightened may become obscure by adding new light to that which it has already received.'
+<br>
+<br>
+Grimaldi also observed the elongation of the image, when a pencil of light from the sun is made to pass through a glass prism: but he ascribed the dispersion of light to irregularities in the material of which the prism was formed; and he was far from suspecting the different refrangibilities of the rays. The discovery of this fact, which has led to so many important consequences in physical optics, was reserved for Newton.
+<br>
+<br>
+<img align="right" src="fresnel.jpg" alt="Augustin-Jean Fresnel" hspace="10" vspace="10" width="200" height="314" border="1">
+AUGUSTIN-JEAN FRESNEL was a nineteenth century French physicist, most often remembered for the invention of unique compound lenses designed to produce parallel beams of light, which are still widely used in lighthouses throughout the world. Born in Broglie, France on May 10, 1788, Fresnel was the son of an architect and received a strict, religious upbringing. His parents were Jansenists, a sect of Roman Catholics that believed only a small, predestined group would receive salvation and that the multitudes could not change their fate through their actions on Earth. Fresnel's early education was provided by his parents and he was considered a slow learner, barely able to read by the age of 8. When he was 12, however, Fresnel began formal studies at the Central School in Caen, where he was introduced to the wonders of science and discovered his talent in mathematics.
+<br>
+<br>
+This talent was not overlooked and one of his teachers inspired him to pursue a career in engineering. Leaving school he entered the Polytechnic School in Paris in 1804 and, two years later, the School of Civil Engineering. After graduation, he worked on engineering projects for several years in a variety of French government departments, but temporarily lost his post when Napoleon returned from Elba in 1815. Having already begun performing scientific work in his spare time, the change of events provided Fresnel with the opportunity to increase his efforts in this arena, and he soon began to focus on optics. Even when he was provided with a new engineering position in Paris after the second restoration, Fresnel continued his scientific research in this field of physics.
+<br>
+<br>
+<a href="fresnel2.html"><img align="left" src="Fresnel diff_b.jpg" alt="Fresnel Diffraction" hspace="10" vspace="10" width="300" height="255" border="3"></a>
+There he derived formulas to explain reflection, refraction, double refraction, and the polarisation of light reflected from a transparent substance. Fresnel also developed a wave theory of diffraction. He created various devices to produce interference fringes in order to demonstrate the interference of light wavelets. Using his inventions, Fresnel was the first to prove that the wave motion of light is transverse. He accomplished this task by polarising light beams in different planes and showing that the two beams do not exhibit interference effects.
+<br>
+<br>
+Around 1818, Augustin Fresnel considered a problem of light diffracting through a slit, and independently derived integrals equivalent to those defining the Euler spiral. At the time, he seemed to be unaware of the fact that Euler (and Bernoulli) had already considered these integrals, or that they were related to a problem of elastic springs. Later, this correspondence was recognised, as well as the fact that the curves could be used as a graphical computation method for diffraction patterns. These integrals are know today as <a href="javascript:open_window('Fresnel Integrals.htm',650,600);"><b> Fresnel Integrals</b></a>.
+<br>
+<br>
+In 1822, Fresnel invented the lens that is now used in lighthouses around the world. The Fresnel lens appears much like a giant glass beehive with a lamp in the center. The lens is composed of rings of glass prisms positioned above and below the lamp to bend and concentrate the light into a bright beam. The Fresnel lighthouse lens works so well that the light can be seen from a distance of 20 or more miles. Before Fresnel's invention, lighthouses used mirrors to reflect light, and could be seen only at short distances and hardly at all during foggy or stormy days. Lighthouses equipped with Fresnel's lenses have helped save many ships from going aground or crashing into rocky coasts.
+<br>
+<br>
+
+Although he received little public recognition for his efforts during his lifetime, Fresnel was bestowed with various honors by his fellow scientists. He was elected a member of the French Academy of Sciences in 1823 and became a member of the Royal Society of London two years later. The British organization awarded him with the prestigious Rumford Medal in what was to be the final year of his life. Having struggled with ill health since his early childhood, Fresnel died of consumption at Ville-d'Avray, France on July 14, 1827.
+<br>
+<br>
+<img align="right" src="cornu.jpg" alt="Marie Alfred Cornu" hspace="10" vspace="10" width="200" height="315" border="1">
+The other main actor of our story is MARIE ALFRED CORNU. He was born in Orleans, France on March 6, 1841 and was educated at the &Eacute;cole Polytechnique and the &Eacute;cole des Mines. He became employed as a physics professor at the &Eacute;cole Polytechnique in 1867, a position he maintained for the rest of his life. Cornu made a wide variety of contributions to the fields of optics and spectroscopy, but is most noted for significantly increasing the accuracy of contemporary calculations of the speed of light.
+<br>
+<br>
+<a href=""></a>
+In 1878, Cornu made adjustments to an earlier method of measuring the velocity of light developed by Armand Fizeau in the 1840s. These adjustments and the improved equipment resulted in the most accurate measurement taken up to that time, 299.990 km/second. For this achievement he was awarded membership into the French Academy of Sciences, along with the prix Lacaze and the Rumford Medal of the Royal Society of England.
+<br>
+<br>
+Other significant accomplishments of Cornu include a photographic study of ultraviolet radiation and the establishment of a graphical approach, known as the Cornu spiral, for calculating light intensities in Fresnel diffraction. A proponent of the wave theory of light, Cornu was also interested in the relationship between electricity and optics and the understanding of weather phenomena. He played a considerable part in the creation of the Observatory of Nice and in 1886 became associated with the Office of Longitudes. He received several honors during his lifetime, including an honorary doctorate from Cambridge University awarded three years before his death in April of 1902.
+<br>
+<br>
+<a href="javascript:open_window('Cornu-Spirale.htm',600,650);"><img align="left" src="Cornu-Spirale.JPG" alt="Cornu spiral" hspace="10" vspace="10" width="350" height="327" border="3"></a>
+<u><b>The Cornu Spiral:</b></u> The Euler spiral is a beautiful and useful curve known by several other
+names, including <i>clothoid</i> and <i>Cornu spiral</i>. The underlying mathematical equations are also most
+commonly known as the <a href="javascript:open_window('Fresnel Integrals.htm',650,600);"><b> Fresnel Integrals</b></a> <b>S</b>(&omega;) and <b>C</b>(&omega;). The profusion of names reflects the fact that the curve has been discovered several different times, each for a completely different application: first, as a particular
+problem in the theory of elastic springs; second, as a graphical computation technique for light diffraction patterns; and third, as a railway transition spiral.
+<br>
+<br>
+The Euler spiral is defined as the curve in which the curvature increases linearly with arclength. Changing the constant of proportionality merely scales the entire curve. Considering curvature
+as a signed quantity, it forms a double spiral with odd symmetry, a single inflection point at the center, as shown in the figure on the left. According to Alfred Gray, it is <i>one of the most elegant of all plane curves</i>.
+<br>
+<br>
+The first appearance of the Euler spiral was as a problem of elasticity, posed by <a href="javascript:open_window('Bernoulli.html',450,550);"><b>James Bernoulli</b></a> in the same 1694 publication as his solution to a related problem, that of the elastica. The elastica is the shape defined by an initially straight band of thin elastic material (such as spring metal) when placed under load at its endpoints. The Euler spiral can be defined as something of the inverse problem; the shape of a pre-curved spring, so that when placed under load at one endpoint, it forms a straight line.
+<br>
+<br>
+<img align="right" src="elasticity.gif" alt="Euler’s spiral as an elasticity problem" hspace="10" vspace="10" width="264" height="228" border="0">
+The problem is shown graphically in the figure on the right which is a copy of Eulers Fig. 17 in his <i>Additamentum 1</i> (<a href="javascript:open_window('Euler.html',450,550);"><b>Leonhard Euler</b></a>. <i>Methodus inveniendi lineas curvas maximi minimive proprietate gaudentes, sive solutio problematis isoperimetrici lattissimo sensu accepti</i>, Additamentum 1. eulerarchive.org, E065, 1744). When the curve is straightened out, the moment at any point is equal to the force <b><i>F</i></b> times the distance <b><i>s</i></b> from the force. The curvature <b><i>&kappa;</i></b> at the point <b><i>m</i></b> in the original curve is proportional to that moment (according to elementary elasticity theory). Because the elastic band is assumed not to stretch, the distance from the force is equal to the arclength. Thus, the curvature is proportional to the arclength, the definition of the Euler spiral.
+<br>
+<br>
+But let us examine the figure in more detail. The lamina in this case is not straight in its natural (unstressed) state, as in the case of Bernoulli's main investigation
+of the elastica, but begins with the shape <b><i>amB</i></b>. At point <b><i>B</i></b>, the curve is held so the tangent is horizontal (i.e. point <b><i>B</i></b> is fixed into the wall), and a weight <b><i>F</i></b> is suspended from the other end of the lamina, pulling that endpoint down from point <b><i>a</i></b> to point <b><i>A</i></b>, and overall flattening out the curve of the lamina.
+<br>
+<br>
+The problem posed now is this: what shape must the lamina <b><i>amB</i></b> take so that it is flattened into an
+exactly straight line when the free end is pulled down by the weight <b><i>F</i></b>? The answer derived by Euler appeals
+to the simple theory of moments: the moment at any point <b><i>M</i></b> along the (straightened) lamina is the
+force <b><i>F</i></b> times the distance <b><i>s</i></b> from <b><i>A</i></b> to <b><i>M</i></b>. The curvature of the curve resulting from the original shape stressed by force <b><i>F</i></b> is equal to the original curvature, <b><i>&kappa;</i></b>, plus the moment <b><i>Fs</i></b> divided by the lamina’s stiffness <b><i>Ek<sup>2</sup></i></b>. Since this resulting curve must be a
+straight line with curvature zero, the solution for the curvature of the original curve is <font color="#FF9900"><b><i>&kappa; = -Fs(Ek<sup>2</sup>)<sup>-1</sup></i></b></font>.
+Euler just flipped the sign for the curvature and grouped all the force and elasticity constants into one constant <b><i>a</i></b> for convenience, yielding <font color="#FF9900"><b><i>1/r = &kappa; = s/a<sup>2</sup></i></b></font>. From this intrinsic equation, Euler derived the curve’s quadrature (<b><i>x</i></b> and <b><i>y</i></b> as a function of the arclength parameter <b><i>s</i></b>):
+<br>
+<br>
+<div align="center">
+<font color="#FF9900" face="Times New Roman" size="3"><i>x = &int;sin(s<sup>2</sup>/2a<sup>2</sup>)ds</i></font> and <font color="#FF9900" face="Times New Roman" size="3"><i>y = &int;cos(s<sup>2</sup>/2a<sup>2</sup>)ds</i></font>.
+</div>
+<p align="justify">
+From here Euler went on to describe several properties of the curve, particularly, <i>"Now from the fact that
+the radius of curvature continuously decreases the greater the <b><i>arc am = s</i></b> is taken, it is manifest that the
+curve cannot become infinite, even if the <b><i>arc s</i></b> is taken infinite. Therefore the curve will belong to the
+class of spirals, in such a way that after an infinite number of windings it will roll up a certain definite
+point as a center, which point seems very difficult to find from this construction."</i>
+<br>
+<br>
+Euler did give a series expansion for the above integral, but in the 1744 publication is not able
+to analytically determine the coordinates of this limit point, saying "<i>Therefore analysis should gain no
+small advance, if someone were to discover a method to assign a value, even if only approximate, to
+the integrals, in the case where <b><i>s</i></b> is infinite; this problem does not seem unworthy for
+geometers to exercise their strength."</i>
+<br>
+<br>
+Euler also derived a series expansion for the integrals, which still remains a viable method for
+computing them for reasonably small <b><i>s</i></b>:
+<br>
+<br>
+<div align="center">
+<font color="#FF9900"><i>x = s<sup>3</sup>/(1&sdot;3 a<sup>2</sup>) - s<sup>7</sup>/(1&sdot;2&sdot;3&sdot;7 a<sup>6</sup>) + s<sup>11</sup>/(1&sdot;2&sdot;3&sdot;4&sdot;5&sdot;11 a<sup>10</sup>) - s<sup>15</sup>/(1&sdot;2&sdot; ... &sdot;7&sdot;15 a<sup>14</sup>) + ...</i></font>
+<br>
+
+<font color="#FF9900"><i>y = s - s<sup>5</sup>/(1&sdot;2&sdot;5 a<sup>4</sup>) + s<sup>9</sup>/(1&sdot;2&sdot;3&sdot;4&sdot;9 a<sup>8</sup>) - s<sup>13</sup>/(1&sdot;2&sdot; ... &sdot;6&sdot;13 a<sup>12</sup>) + ...</i></font>
+<br>
+</div>
+<p align="justify">
+But it took him about thirty-eight years to solve the problem of the integral’s limits. In his 1781 <i>"On
+the values of integrals extended from the variable term s = 0 up to s = &infin;"</i>, he finally gave the
+<a href="javascript:open_window('solution euler.htm',550,600);"><b> solution</b></a>, which he had <i>"recently found by a happy chance and in an exceedingly peculiar manner"</i>, of
+<b><i>x = y = (a/&radic;2)&radic;(<font face="Times New Roman">&pi;</font>/2)</i></b>.
+<br>
+<br>
+<u><b>Fresnel on diffraction problems — 1818:</b></u> Around 1818, Augustin Fresnel considered a problem of light diffracting through a slit, and independently
+derived integrals equivalent to those defining the Euler spiral. At the time, he seemed to be unaware of the fact that Euler (and Bernoulli) had already considered these integrals, or that they were related to a problem of elastic springs. Later, this correspondence was recognised, as well as the fact that the curves could be used as a graphical computation method for diffraction patterns.
+<br>
+<br>
+The following presentation of Fresnel’s results loosely follows Preston’s 1901 <i>The Theory of Light</i>, which is among the earliest English-language accounts of this theory. Another readable account is Houstoun’s 1915 <i>Treatise on Light</i>.
+<br>
+<br>
+<img align="left" src="fresnel_scheme.jpg" alt="Euler’s spiral as an elasticity problem" hspace="10" vspace="10" width="400" height="224" border="1">
+
+Consider a monochromatic light source diffracted through a slit. Based on fundamental principles of wave optics, the wavefront emerging from the slit is the integral of point sources at each point along the slit, shown in the figure on the left as <b><i>s<sub>0</sub></i></b> through <b><i>s<sub>1</sub></i></b>. Assuming the wavelength is <b><i>&lambda;</i></b>, the phase <b><i>&Phi;</i></b> of the light emanating from point <b><i>s</i></b> reaching the target on the right is:
+<br>
+<br>
+<div align="center">
+<font color="#FF9900" face="Times New Roman" size="3"><i>&Phi; = (2&pi;/&lambda;)(x<sup>2</sup> + s<sup>2</sup>)<sup>1/2</sup></i></font>.
+</div>
+<p align="justify">
+Assuming that <b><i>s&laquo;x</i></b>, apply a simplifying approximation:
+
+<br>
+<div align="center">
+<font color="#FF9900" face="Times New Roman" size="3"><i>&Phi; &asymp; (2&pi;/&lambda;)(x + &frac12; s<sup>2</sup>)</i></font>.
+</div>
+<p align="justify">
+Again assuming <b><i>s&laquo;x</i></b>, the intensity of the wave can be considered constant for all <b><i>s<sub>0</sub> &lt; s &lt; s<sub>1</sub></i></b>.
+Dropping the term including <b><i>x</i></b> (it represents the phase of the light incident on the target, but doesn’t
+affect the total intensity), and choosing units arbitarily to simplify constants, assume <b><i>&lambda; = &frac12;</i></b>, and then the intensity incident on the target is:
+<br>
+<br>
+<div align="center">
+<font color="#FF9900" face="Times New Roman" size="3"><i>I = [&int;cos&Phi;(s)ds]<sup>2</sup> + [&int;sin&Phi;(s)ds]<sup>2</sup> = [&int;cos (&frac12; &pi;s<sup>2</sup>)ds]<sup>2</sup> + [&int;sin (&frac12; &pi;s<sup>2</sup>)ds]<sup>2</sup></i></font>.
+</div>
+<p align="justify">
+The indefinite integrals needed to compute this intensity are our well-known <a href="javascript:open_window('Fresnel Integrals.htm',650,600);"><b> Fresnel Integrals</b></a>:
+<br>
+<br>
+<div align="center">
+<font color="#FF9900" face="Times New Roman" size="3"><i><b>S(&omega;</b>) = &int;sin (&frac12; &pi;&omega;<sup>2</sup>)d&omega;</i></font> and <font color="#FF9900" face="Times New Roman" size="3"><i><b>C(&omega;)</b> = &int;cos (&frac12; &pi;&omega;<sup>2</sup>)d&omega;</i></font>.
+</div>
+<p align="justify">
+And now let us have a look back to the formulas Euler derived for his spiral's <b><i>x</i></b> and <b><i>y</i></b> (as a function of the arclength parameter <b><i>s</i></b>):
+<br>
+<div align="center">
+<font color="#FF9900" face="Times New Roman" size="3"><i>x = &int;sin(s<sup>2</sup>/2a<sup>2</sup>)ds</i></font> and <font color="#FF9900" face="Times New Roman" size="3"><i>y = &int;cos(s<sup>2</sup>/2a<sup>2</sup>)ds</i></font>.
+</div>
+<p align="justify">
+Choosing <b><i>a = 1/&omega;</i></b>, these integrals are obviously equivalent to the formula for the Cartesian coordinates
+of the Euler spiral. The choice of scale factor gives a simpler limit: <b><i>S(&omega;) = C(&omega;) = &frac12;</i></b> as <b><i>&omega; &rarr; &infin;</i></b>. Fresnel gives these limits, but does not justify the result.
+<br>
+Given these integrals, the formula for intensity can be rewritten simply as:
+<br>
+<br>
+<div align="center">
+<font color="#FF9900" face="Times New Roman" size="3"><i>I = [S(s<sub>1</sub>) - S(s<sub>0</sub>)]<sup>2</sup> + [C(s<sub>1</sub>) - C(s<sub>0</sub>)]<sup>2</sup></i></font>.
+</div>
+<p align="justify">
+Alfred Marie Cornu plotted the spiral accurately in 1874 and proposed its use as a graphical
+computation technique for diffraction problems. His main insight is that the intensity <b><i>I</i></b> is simply the
+square of the Euclidean distance between the two points on the Euler spiral at arclength <b><i>s<sub>0</sub></i></b> and <b><i>s<sub>1</sub></i></b>.
+Cornu observes the same principle as Bernoulli’s proposal of the formula for the integrals: <i>Le rayon de
+courbure est en raison inverse de l’arc</i> (the radius of curvature is inversely proportional to arclength),
+but he, like Fresnel, also seems unaware of Euler’s prior investigation of the integral, or of the curve.<br>
+Today, it is common to use complex numbers to obtain a more concise formulation of the Fresnel
+integrals, reflecting the intuitive understanding of the propagation of light as a complex-valued wave
+<br>
+<br>
+<div align="center">
+<font color="#FF9900" face="Times New Roman" size="3"><i>I = C(&omega;) + iS(&omega;) = &int;e<sup>i&frac12;&pi;&omega;<sup>2</sup></sup>d&omega;</i></font>.
+</div>
+<p align="justify">
+Even though Euler anticipated the important mathematical results, the phrase "spiral of Cornu"
+became popular. At the funeral of Alfred Cornu on April 16, 1902, Henri Poincar&eacute; had these glowing
+words: <i>"Also, when addressing the study of diffraction, he had quickly replaced an unpleasant multitude
+of hairy integral formulas with a single harmonious figure, that the eye follows with pleasure and where
+the spirit moves without effort".</i> Elaborating further in his sketch of Cornu in his 1910 <i>Savants et
+&eacute;crivains</i>, <i>"Today, everyone, to predict the effect of an arbitrary screen on a beam of light, makes use
+of the spiral of Cornu."</i>
+<br>
+<div align="center">
+<a href="javascript:open_window('Fresnelbeugung-Spalt.htm',600,650);"><img src="Fresnelbeugung-Spalt0101.JPG" alt="Cornu spiral" hspace="10" vspace="10" width="337" height="214" border="3"></a>
+<a href="javascript:open_window('Fresnelbeugung-Draht.htm',600,650);"><img src="Fresnelbeugung-Draht0146.JPG" alt="Cornu spiral" hspace="10" vspace="10" width="337" height="214" border="3"></a>
+
+<br>
+
+
+<i>The figures on the top show Fresnel diffraction intensity patterns of an aperture (left) and an object, i.e. a wire, (right) calculated with Mathcad using the Fresnel Integrals - the script can be seen by following the link.</i>
+</div>
+<p align="justify">
+<br>
+<img align="right" src="Clotho.jpg" alt="Clotho" hspace="10" vspace="10" width="148" height="251" border="0">
+
+Since apparently two names were not adequate, Ernesto Ces&agrave;ro around 1886 dubbed the curve
+"clothoide", after <i>Clotho</i>, the youngest of the three Fates of the Greek mythology, who spun
+the threads of life, winding them around her distaff — since the curve spins or twists about its asymptotic
+points. The picture on the right shows these three fates: <i>Clotho</i> spins the thread of life, <i>Lachesis</i> measures it out and <i>Atropos</i> cuts it. It was painted by Friedrich Paul Thumann in the Victorian Era when it was acceptable to depict bare breasted women so long as they were mythological and not real - for what it's worth...
+<br>
+<br>
+Today, judging from the number of documents retrieved by keyword from an Internet search, the term "clothoid" is by far the most popular. However, as Archibald wrote in 1917 (<i>Raymond Clare Archibald; Euler integrals and Euler’s spiral. American Mathematical Monthly, 25(6):276–282, June 1917</i>), by
+modern standards of attribution, it is clear that the proper name for this beautiful curve is the Euler spiral.
+<br>
+<br>
+<br>
+<u><b>Fresnel Diffraction patterns using MATLAB</b></u> A powerful tool to calculate Fresnel diffraction patterns is MATLAB. The following source code is easy to use and calculates both the intensity patterns and the two dimensional wavefront at any distance <b>z</b> from a square aperture or object. Have fun!
+
+<font face="Courier New"  color="gainsboro">
+<ul>2d propagation from square apertures
+<br>
+<br>
+
+ii=sqrt(-1)
+<br>
+lambda= .365; &nbsp; % wavelenght [&micro;m]<br>
+z=1; &nbsp;&nbsp; % distance [&micro;m]<br>
+w=1; &nbsp;&nbsp; % width of slit is 2*w [&micro;m]<br>
+<br>
+x=-12.75:0.05:12.8; &nbsp;&nbsp; % setup spatial axis [&micro;m]<br>
+freqx=-10:20/512:10-1/512; &nbsp;&nbsp; % setup frequency axis [1/&micro;m]<br>
+freqy=freqx;<br>
+<br>
+<br>
+u0=zeros(512); &nbsp;&nbsp; % field at z=0<br>
+a0=zeros(512); &nbsp;&nbsp; % angular spectrum at z=0<br>
+H=zeros(512); &nbsp;&nbsp; % transfer function<br>
+az=zeros(512); &nbsp;&nbsp; % angular spectrum at z=z<br>
+uz=zeros(512); &nbsp;&nbsp; % field at z=z<br>
+<br>
+
+for nx=1:512 &nbsp;&nbsp; % setup transfer function<br>
+ &nbsp;&nbsp; for ny=1:512<br>
+
+ &nbsp;&nbsp;&nbsp;&nbsp; H(nx,ny)=exp(ii*2*pi*(z/lambda)*...<br>
+ &nbsp;&nbsp;&nbsp;&nbsp; sqrt(1-(lambda*freqx(nx))^2-(lambda*freqy(ny))^2));<br>
+
+ &nbsp;&nbsp; end<br>
+end<br>
+<br>
+
+u0(257-w*20:256+w*20,257-w*20:256+w*20)=1; &nbsp;&nbsp; % setup aperture<br>
+a0=(fftshift(fft2(u0))); &nbsp;&nbsp; % fourier transform<br>
+az=a0.*H; &nbsp;&nbsp; % multiply with transfer function<br>
+uz=ifft2(fftshift(az)); &nbsp;&nbsp; % inverse fourier transform<br>
+p=uz.*conj(uz);<br>
+<br>
+figure(1)
+plot(x, p(:,256)); &nbsp;&nbsp; % plot of cross-section of intensity at z<br>
+xlabel('x'); ylabel('I');<br>
+<br>
+
+figure(2)<br>
+imagesc(x, x, p); &nbsp;&nbsp; %diffraction pattern at z<br>
+xlabel('x'); ylabel('y'); colormap(gray);<br>
+colorbar;<br>
+</ul></font>
+<br>
+<br>
+
+
+<body onLoad="SLIDE_start()">
+<center><img name="SLIDE_picBox" style="border: thin inset white">
+
+<table>
+<tr>
+  <td id="SLIDE_textBox" align="center">&nbsp;</td>
+</tr>
+</table>
+<table>
+<tr valign="middle">
+  <td>
+  <select name="SLIDE_speeds" class="input" font="color:#008800" onChange="SLIDE_speeds(this)">
+    <option value="1000">1 second</option>
+    <option value="2000">2 seconds</option>
+    <option value="3000">3 seconds</option>
+    <option value="5000" selected>5 seconds</option>
+    <option value="8000">8 seconds</option>
+  </select>
+  &nbsp;&nbsp;&nbsp;
+  </td>
+  <td>
+  <button type="button" id="SLIDE_back" class="button" style="background-color:#003100" onClick="SLIDE_back()">&nbsp;<font color="#008800"><b><<</b></font>&nbsp;</button>&nbsp;
+  <button type="button" id="SLIDE_play" class="button" style="background-color:#003100" onClick="SLIDE_play()"><font color="#008800"><b>Play</b></font></button>&nbsp;
+  <button type="button" id="SLIDE_pause" class="button" style="background-color:#003100" onClick="SLIDE_pause()"><font color="#008800"><b>Pause</b></font></button>&nbsp;
+  <button type="button" id="SLIDE_forward" class="button" style="background-color:#003100" onClick="SLIDE_forward()">&nbsp;<font color="#008800"><b>>></b></font>&nbsp;</button></center>
+  </td>
+</tr>
+</table>
+</div>
+
+
+
+      <br>
+      <br>
+<hr noshade size="1" color="#008000">
+<br>
+
+</body>
+
+      <p align="center"><b><strong><font face="Verdana" size="2" color="#009900">
+     [ <a href="../../../work/work.html">back</a> ] </font></p>
+
+
+</HTML>
