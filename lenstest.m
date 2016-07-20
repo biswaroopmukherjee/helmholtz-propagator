@@ -16,3 +16,7 @@ img = fftshift(fft2(exp(((1j*2*pi/lambda)*(R.^2))/(2*f))));
 imagesc(abs(ifft2(ifftshift(img))))
 
 end
+
+function H=transfer_function(z)
+H = exp(1j*2*pi*(z/wavelength) * sqrt(1-(wavelength*freqx).^2 - ((wavelength*freqy).^2)+0j));
+end
