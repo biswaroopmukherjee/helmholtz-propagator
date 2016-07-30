@@ -3,26 +3,45 @@ import matplotlib.pyplot as plt
 import math
 from scipy import signal 
 
-# def masked_axicon_zplot(zlim=[-0.2,1], npoints=60, maskrad=1):
-#         ## Make the forward beam from the focus
-#         light_forward = Light(type='axicon',N=512)
+def masked_axicon_zplot(zlim=[-0.2,1], npoints=60, maskrad=1):
+        ## Make the forward beam 
+        light_forward = Light(type='axicon',N=512)
+        ## Move to focus
+        light_forward.propagate_after_lens(z=0)
+        ## Apply the mask and propagate
+        light_forward.apply_mask(maskrad=maskrad)
+        light_forward.show_intensity()
+        zlimf = zlim[1]
+        npointsf = np.floor(npoints*zlimf/np.sum(np.abs(zlim)))
+        zprofile_forward = light_forward.zplot_after_mask(zlim=zlimf, npoints = npointsf)
 
-#         ## Prepare the mask
-#         mask = maskrad-light_forward.R
-#         mask[mask>0]=0
-#         mask[mask<0]=1
+        ## Make the reverse beam 
+        light_reverse= Light(type='axiconrev',N=512)
+        ## Move to focus
+        light_reverse.propagate_after_lens(z=0)
+        ## Apply the mask and propagate
+        light_reverse.apply_mask(maskrad=maskrad)
+        zlimr = np.abs(zlim[0])
+        npointsr = np.abs(np.floor(npoints*zlimr/np.sum(np.abs(zlim))))
+        zprofile_reverse = light_reverse.zplot_after_mask(zlim=zlimr, npoints = npointsr)
 
-#         ## Mask the light and propagate
-#         light_forward.Uz = light_forward.Uz*mask
-#         zlimf = zlim[1]
-#         npointsf = np.floor(npoints*zlimf/np.sum(np.abs(zlim)))
-#         zprofile = light_forward.show_zplot(zlim=zlimf, npoints = npointsf)
+        ## Put everything together
+        full_light = np.hstack(([np.fliplr(zprofile_forward.transpose()),zprofile_reverse.transpose()]))
 
-#         ## Make the reverse beam from the focus
-#         light_reverse = Light(type='axiconrev',N=512)
-#         zlimf = zlim[1]
-#         npointsf = np.floor(npoints*zlimf/np.sum(np.abs(zlim)))
-#         zprofile = light_reverse.show_zplot(zlim=zlimf, npoints = npointsf)
+        fig = plt.figure(figsize=(10,10))
+        ax = fig.add_subplot(111)
+        ax.imshow(full_light, aspect=0.2)
+
+        plt.xlabel('z')
+        plt.ylabel('r')
+        plt.title('Propagation from axicon with a mask')
+
+        for item in ([ax.title, ax.xaxis.label, ax.yaxis.label] + ax.get_xticklabels() + ax.get_yticklabels()):
+            item.set_fontsize(20)
+
+        plt.show()
+
+        return
 
 
 class Light():
@@ -72,7 +91,7 @@ class Light():
             np.sqrt(1-np.power((self.wavelength*self.freqx),2) - \
             np.power((self.wavelength*self.freqy),2)+0j))
         return H
-        
+
     def propagate(self, z=10):
         
         ## Calculate the transfer function
@@ -80,7 +99,17 @@ class Light():
         ## Propagate
         A0 = np.fft.fftshift(np.fft.fft2(self.initial_field))
         Az = A0*H
-        self.Uz = np.fft.ifft2(np.fft.fftshift(Az))
+        self.Uz = np.fft.ifft2(np.fft.ifftshift(Az))
+        self.Iz = np.abs(self.Uz)
+        
+    def propagate_after_mask(self, z=10):
+        
+        ## Calculate the transfer function
+        H = self.transfer_function(z)
+        ## Propagate
+        A0 = np.fft.ifft2(np.fft.ifftshift(self.initial_field))
+        Az = A0*H
+        self.Uz = np.fft.fftshift(np.fft.fft2(Az))
         self.Iz = np.abs(self.Uz)
         
     def propagate_after_lens(self, z=10):
@@ -184,4 +213,24 @@ class Light():
             zprofile.append(cut)
             
         return np.vstack(zprofile)
+
+    def zplot_after_mask(self, zlim=20, npoints=10):
+        zprofile = []
+        for z in np.linspace(0,zlim,npoints):
+            self.propagate_after_mask(z)
+            cut = self.Iz[math.floor(self.resolution/2),:]
+            zprofile.append(cut)
+            
+        return np.vstack(zprofile)
+
+    def apply_mask(self, maskrad=1):
+        ## Prepare the mask
+        mask = maskrad-self.R
+        mask[mask>0]=0
+        mask[mask<0]=1
+        self.initial_field = self.Uz*mask
+        self.Uz = self.initial_field
+        self.Iz = np.abs(self.initial_field)
+
+
 
